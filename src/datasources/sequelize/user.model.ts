@@ -1,62 +1,37 @@
-import { Model, DataTypes, Optional } frorm 'sequelize';
+import { Model, DataTypes, Optional } from 'sequelize';
 
-import TripEntity from '../../core/entities/trip.entity';
+import UserEntity from '../../core/entities/user.entity';
 import sequelizeInstance from './db-connection.service';
+import Trip from './trip.model';
 
-type TripCreationAtrributes = Optional<TripEntity, 'id'>
+type UserCreationAtrributes = Optional<UserEntity, 'id'>
 
-class Trip
-extends Model<TripEntity, TripCreationAtrributes>
-implements TripEntity {
+class User extends Model<UserEntity, UserCreationAtrributes> implements UserEntity {
   public id!: number;
-  public userId!: number;
-  public tripStart!: string;
-  public tripEnd!: string;
-  public distance!: number;
-  public duration?: string | null;
-  public cost?: number | null;
 
   // time stamps
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 }
 
-Trip.init(
+User.init(
   {
     id: {
       type: DataTypes.INTEGER.UNSIGNED,
-      autoIncrement: true,
       primaryKey: true,
-    },
-    userId : {
-      type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: false,
-    },
-    tripStart: {
-      type: new DataTypes.STRING(128),
-      allowNull: false,
-    },
-    tripEnd: {
-      type: new DataTypes.STRING(128),
-      allowNull: false,
-    },
-    distance: {
-      type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: false,
-    },
-    duration: {
-      type: new DataTypes.STRING(128),
-      allowNull: true,
-    },
-    duration: {
-      type: new DataTypes.INTEGER.UNSIGNED,
-      allowNull: true,
     },
   },
   { 
-    tableName: 'trip',
+    tableName: 'user',
     sequelize: sequelizeInstance
   }
 );
 
-export default Trip;
+User.hasMany(Trip, { as: 'trips', foreignKey: 'userId' });
+Trip.belongsTo(User, { foreignKey: 'userId' } );
+
+(async () => {
+  await sequelizeInstance.sync();
+})();
+
+export default User;

@@ -1,4 +1,4 @@
-import { Model, DataTypes, Optional } frorm 'sequelize';
+import { Model, DataTypes, Optional } from 'sequelize';
 
 import TripEntity from '../../core/entities/trip.entity';
 import sequelizeInstance from './db-connection.service';
@@ -48,8 +48,8 @@ Trip.init(
       type: new DataTypes.STRING(128),
       allowNull: true,
     },
-    duration: {
-      type: new DataTypes.INTEGER.UNSIGNED,
+    cost: {
+      type: DataTypes.INTEGER.UNSIGNED,
       allowNull: true,
     },
   },

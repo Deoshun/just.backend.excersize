@@ -6,7 +6,7 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - ./apps/mysql:/var/lib/mysql
+      - ./docker_volumes/mysql:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=pikachu
-      - MYSQL_DATABASE=pokemon
+      - MYSQL_ROOT_PASSWORD=${DB_PWD}
+      - MYSQL_DATABASE=${DB_NAME}

@@ -3,8 +3,11 @@ export interface TripDTO {
   tripStart: string;
   tripEnd: string;
   distance: number;
+  cost?: number;
+  duration?: string;
 }
 
 export interface TripUpdatePayload {
-  cost: number;
+  cost?: number;
+  duration?: string;
 }

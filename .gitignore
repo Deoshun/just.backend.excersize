@@ -1,6 +1,9 @@
 # AWS 
 package.yaml
 
+# Docker
+docker_volumes/
+
 ### Node ###
 # Logs
 logs
