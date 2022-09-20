@@ -41,7 +41,7 @@ Trip.init(
       allowNull: false,
     },
     distance: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.DOUBLE,
       allowNull: false,
     },
     duration: {
@@ -49,7 +49,7 @@ Trip.init(
       allowNull: true,
     },
     cost: {
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.DOUBLE,
       allowNull: true,
     },
   },

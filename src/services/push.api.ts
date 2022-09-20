@@ -7,7 +7,7 @@ class PushAPI implements PushService {
   public async push(message: PushDTO): Promise<void> {
     const url = `https://eofhd4fui61rdfe.m.pipedream.net/push`;
     try {
-      const { data, status } = await axios.post<any>(
+      await axios.post(
         url,
         message,
         globalHeaders

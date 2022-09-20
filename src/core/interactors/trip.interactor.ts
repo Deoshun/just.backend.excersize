@@ -5,9 +5,8 @@ import TripEntity from '../entities/trip.entity';
 import PushService from '../services/push.service';
 import PolicyService from '../services/policy.service';
 
-import { TripDTO, TripUpdatePayload } from '../dto/trip.dto';
+import { TripDTO } from '../dto/trip.dto';
 import { PolicyDTO } from '../dto/policyService.dto';
-import { PushDTO } from '../dto/pushService.dto';
 import { HTTP_STATUS } from '../const/http';
 import { IResponse } from './IResponse';
 import { toISODuration, calculateCost } from '../utils/functions'
@@ -40,26 +39,30 @@ class TripInteractor {
     }
     return { status: HTTP_STATUS.OK };
     } catch(e) {
+      if (e.message === 'service error') {
+        return { status: HTTP_STATUS.OK };
+      } 
       return { status: HTTP_STATUS.INTERNAL_ERROR, error: e.message };
+      
     }
   }
 
   async addNewTrip(trip: TripDTO): Promise<TripDTO> {
     const { tripStart, tripEnd, userId, distance } = trip;
-
+    console.log('ADD');
     trip.duration = this._calcDuration(tripStart, tripEnd);
     trip.cost = await this._calcPrice(userId, distance);
-    
+    console.log('CALLED');
     await this.userRepository.getOrCreate(userId);
     await this.tripRepository.add(trip);
-    
+    console.log('Called 2');
     return trip;
   }
 
   _calcDuration(start: string, end: string): string {
-    let startDate = new Date(start);
-    let endDate = new Date(end);
-    let differenceInMs = endDate.getTime() - startDate.getTime();
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+    const differenceInMs = endDate.getTime() - startDate.getTime();
     return toISODuration(differenceInMs);
   }
 

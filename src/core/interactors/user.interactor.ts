@@ -13,14 +13,14 @@ class UserInteractor {
 
   async getTrips(userId: number): Promise<IResponse<TripEntity[] | undefined>> {
     try {
-      let trips: TripEntity[] = await this.userRepository.getTrips(userId);
+      const trips: TripEntity[] = await this.userRepository.getTrips(userId);
       return { status: HTTP_STATUS.OK, data: trips.map(this._formatTrip) };
     } catch(e) {
       return { status: HTTP_STATUS.INTERNAL_ERROR, error: e.message };
     }
   }
 
-  _formatTrip(trip: TripEntity): TripEntity {
+  _formatTrip(trip: any): TripEntity {
     const { id, userId, tripStart, tripEnd, duration, distance, cost } = trip;
     return { id, userId, tripStart, tripEnd, duration, distance, cost };
   }

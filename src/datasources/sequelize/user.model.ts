@@ -31,7 +31,9 @@ User.hasMany(Trip, { as: 'trips', foreignKey: 'userId' });
 Trip.belongsTo(User, { foreignKey: 'userId' } );
 
 (async () => {
-  await sequelizeInstance.sync();
+  if (process.env.NODE_ENV !== 'test') {
+    await sequelizeInstance.sync({force:true});
+  }
 })();
 
 export default User;
