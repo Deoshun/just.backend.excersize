@@ -19,10 +19,7 @@ Within the project repository run
 
 
 ```
-
 docker-compose up -d
-
-
 ```
 
 be sure to check port 3306 is available.
@@ -34,10 +31,7 @@ It takes several minutes for the database to be accessible from Node, so i recco
 before running:
 
 ```
-
 npm run dev
-
-
 ```
 
 Once you've done that you can reach the endpoints on localhost:3000
@@ -50,10 +44,7 @@ the tests will complete then hang.
 To test run:
 
 ```
-
 npm t
-
-
 ```
 
 #### On having more time 
