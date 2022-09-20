@@ -31,6 +31,7 @@ It takes several minutes for the database to be accessible from Node, so i recco
 before running:
 
 ```
+npm i
 npm run dev
 ```
 
