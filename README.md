@@ -37,6 +37,19 @@ npm run dev
 
 Once you've done that you can reach the endpoints on localhost:3000
 
+Example Calls
+
+Post http://localhost:3000/trips
+
+```
+{
+    "userId": 99,
+    "tripStart": "2022-09-08T11:37:00.000Z",
+    "tripEnd": "2022-09-08T12:40:00.000Z", 
+    "distance": 85.7
+}
+```
+
 #### Optional.
 
 Testing, you can run the unit tests written for this project, but due to a bug (probably sequelize)
@@ -64,5 +77,5 @@ npm t
 - review code carefully
 - implement e2e tests
 - remove redendant interfaces
-
+- fix output for users/:id/trips
 
