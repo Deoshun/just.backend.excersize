@@ -49,13 +49,13 @@ class TripInteractor {
 
   async addNewTrip(trip: TripDTO): Promise<TripDTO> {
     const { tripStart, tripEnd, userId, distance } = trip;
-    console.log('ADD');
+
     trip.duration = this._calcDuration(tripStart, tripEnd);
     trip.cost = await this._calcPrice(userId, distance);
-    console.log('CALLED');
+
     await this.userRepository.getOrCreate(userId);
     await this.tripRepository.add(trip);
-    console.log('Called 2');
+
     return trip;
   }
 
