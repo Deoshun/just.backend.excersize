@@ -4,8 +4,8 @@ import UserEntity from '../core/entities/user.entity';
 import UserModel from './sequelize/user.model';
 
 class UserDataSource implements UserRepository {
-  public async getTrips(userId: number) : Promise<TripEntity[]> {
-    const user: any = await UserModel.findOne({ 
+  public async getTrips(userId: number): Promise<TripEntity[]> {
+    const user: any = await UserModel.findOne({
       where: { id: userId },
       include: 'trips'
     });
@@ -14,11 +14,11 @@ class UserDataSource implements UserRepository {
     }
     return user.trips;
   }
-  public async getOrCreate(userId: number) : Promise<UserEntity> {
-      const user: any  = await UserModel.findOrCreate({ 
-          where: { id: userId }, 
-      });
-      return user;
+  public async getOrCreate(userId: number): Promise<UserEntity> {
+    const user: any = await UserModel.findOrCreate({
+      where: { id: userId },
+    });
+    return user;
   }
 }
 

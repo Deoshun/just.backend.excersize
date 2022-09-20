@@ -1,5 +1,5 @@
-import TripInteractor from './trip.interactor'; 
-import UserInteractor from './user.interactor'; 
+import TripInteractor from './trip.interactor';
+import UserInteractor from './user.interactor';
 import TripDataSource from '../../datasources/trip.datasource';
 import UserDataSource from '../../datasources/user.datasource';
 import PolicyAPI from '../../services/policy.api';

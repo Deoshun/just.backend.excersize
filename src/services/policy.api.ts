@@ -16,7 +16,7 @@ class PolicyAPI implements PolicyService {
         globalHeaders
       );
       return response.data;
-    } catch(e) {
+    } catch (e) {
       console.log(e);
       throw new Error('service error');
     }

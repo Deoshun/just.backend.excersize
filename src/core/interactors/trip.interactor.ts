@@ -19,7 +19,7 @@ class TripInteractor {
   pushService: PushService;
 
   constructor(tripRepository: TripRepository, userRepository: UserRepository,
-              policyService: PolicyService, pushService: PushService) {
+    policyService: PolicyService, pushService: PushService) {
     this.tripRepository = tripRepository;
     this.userRepository = userRepository;
     this.policyService = policyService;
@@ -27,23 +27,23 @@ class TripInteractor {
   }
 
   async process(trip: TripDTO): Promise<IResponse<undefined>> {
-    try { 
-    const existingTrip: TripEntity = await this.tripRepository.findMatching(trip);
-    if (!existingTrip) {
-      const newTrip: TripDTO = await this.addNewTrip(trip);
-      if (newTrip.cost) {
-        const message = this._createMessage(newTrip.distance, newTrip.cost);
-        console.log(message);
-        await this.pushService.push(message);
+    try {
+      const existingTrip: TripEntity = await this.tripRepository.findMatching(trip);
+      if (!existingTrip) {
+        const newTrip: TripDTO = await this.addNewTrip(trip);
+        if (newTrip.cost) {
+          const message = this._createMessage(newTrip.distance, newTrip.cost);
+          console.log(message);
+          await this.pushService.push(message);
+        }
       }
-    }
-    return { status: HTTP_STATUS.OK };
-    } catch(e) {
+      return { status: HTTP_STATUS.OK };
+    } catch (e) {
       if (e.message === 'service error') {
         return { status: HTTP_STATUS.OK };
-      } 
+      }
       return { status: HTTP_STATUS.INTERNAL_ERROR, error: e.message };
-      
+
     }
   }
 
@@ -71,7 +71,7 @@ class TripInteractor {
       const policy: PolicyDTO = await this.policyService.getPolicy(userId);
 
       return calculateCost(policy, distance);
-    } catch(e) {
+    } catch (e) {
       if (e.message !== 'service error') {
         throw e;
       }
@@ -79,7 +79,7 @@ class TripInteractor {
   }
 
   _createMessage(distance: number, cost: number) {
-    const costInDollars = (cost/100).toFixed(2);
+    const costInDollars = (cost / 100).toFixed(2);
     return {
       title: pushTitle,
       body: pushBody(distance, costInDollars)
