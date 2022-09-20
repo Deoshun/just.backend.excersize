@@ -7,7 +7,7 @@ import { IResponse } from './IResponse';
 class UserInteractor {
   userRepository: UserRepository;
 
-  constructor(userRepository: UserRepository) { 
+  constructor(userRepository: UserRepository) {
     this.userRepository = userRepository;
   }
 
@@ -15,7 +15,7 @@ class UserInteractor {
     try {
       const trips: TripEntity[] = await this.userRepository.getTrips(userId);
       return { status: HTTP_STATUS.OK, data: trips.map(this._formatTrip) };
-    } catch(e) {
+    } catch (e) {
       return { status: HTTP_STATUS.INTERNAL_ERROR, error: e.message };
     }
   }

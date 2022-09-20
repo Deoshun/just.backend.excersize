@@ -12,7 +12,7 @@ class PushAPI implements PushService {
         message,
         globalHeaders
       );
-    } catch(e) {
+    } catch (e) {
       console.log(e);
       throw new Error('service error');
     }
