@@ -50,6 +50,26 @@ Post http://localhost:3000/trips
 }
 ```
 
+GET http://localhost:3000/users/99/trips
+
+```
+{
+    "data": [
+        {
+            "id": 1,
+            "userId": 99,
+            "tripStart": "2022-09-08T11:37:00.000Z",
+            "tripEnd": "2022-09-08T12:40:00.000Z",
+            "duration": "PT1H3M",
+            "distance": 85.7,
+            "cost": 1456.9
+        }
+    ]
+}
+```
+
+note: formatting not exact
+
 #### Optional.
 
 Testing, you can run the unit tests written for this project, but due to a bug (probably sequelize)
